@@ -37,8 +37,6 @@ public class Car extends Brand{
         return this;
     }
 
-
-
     @Column(name = "reg_number")
     public String getRegistrationNumber() {
         return registrationNumber;

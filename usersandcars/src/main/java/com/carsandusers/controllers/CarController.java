@@ -20,16 +20,16 @@ public class CarController {
     private final CarService carService;
 
     @Autowired
-    public CarController(CarService carService ) {
+    public CarController(CarService carService) {
         this.carService = carService;
     }
 
 
     @PostMapping("/create")
-    public ResponseEntity<Object> createCar(@RequestBody CarDto car, HttpServletResponse response){
+    public ResponseEntity<Object> createCar(@RequestBody CarDto car, HttpServletResponse response) {
 
-        if (car.getOwner() == null || car.getBrand() == null || car.getModel() == null){
-            return new ResponseEntity<Object>(new ApiError("Owner, Brand and Model are required in RequestBody"),
+        if (car.getOwner() == null || car.getBrand() == null || car.getModel() == null) {
+            return new ResponseEntity<Object>(new ApiError("Owner - all fields, Brand and Model are required in RequestBody"),
                     HttpStatus.BAD_REQUEST);
         }
 
@@ -40,31 +40,31 @@ public class CarController {
     }
 
     @GetMapping("/all")
-    public ResponseEntity<Object> getAllCars (){
+    public ResponseEntity<Object> getAllCars() {
         List<Car> cars = carService.getAllCars();
 
-        if (cars.isEmpty()){
+        if (cars.isEmpty()) {
             return new ResponseEntity<>(new ApiError("Not have cars for view"), HttpStatus.NOT_FOUND);
         }
 
-        return new ResponseEntity<>(cars,HttpStatus.OK);
+        return new ResponseEntity<>(cars, HttpStatus.OK);
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Object> deleteCar(@PathVariable Long id){
-        if (!carService.deleteCar(id)){
-            return new ResponseEntity<>(new ApiError("Car is not exist"),HttpStatus.BAD_REQUEST);
+    public ResponseEntity<Object> deleteCar(@PathVariable Long id) {
+        if (!carService.deleteCar(id)) {
+            return new ResponseEntity<>(new ApiError("Car is not exist"), HttpStatus.BAD_REQUEST);
         }
 
-        return new ResponseEntity<>(new ApiError("Car deleted complete"),HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<Object> updateCar(@PathVariable Long id, @RequestBody CarDto carDto){
+    public ResponseEntity<Object> updateCar(@PathVariable Long id, @RequestBody CarDto carDto) {
 
-        if (carService.getById(id).isEmpty()){
-            return new ResponseEntity<>(new ApiError("No such car with this ID"),HttpStatus.OK);
+        if (carService.getById(id).isEmpty()) {
+            return new ResponseEntity<>(new ApiError("No such car with this ID"), HttpStatus.OK);
         }
 
         Car car = carService.updateCar(id, carDto);
@@ -74,17 +74,16 @@ public class CarController {
     }
 
     @GetMapping("/all/params")
-    public ResponseEntity<Object> getAllParam(@RequestParam(name = "model") String param){
-        List<Car> allByParams  = carService.findAllByParams(param);
+    public ResponseEntity<Object> getAllParam(@RequestParam(name = "model") String param) {
+        List<Car> allByParams = carService.findAllByParams(param);
 
-        if (allByParams.isEmpty()){
-            return new ResponseEntity<>(new ApiError("No such cars with this parameter in DB"),HttpStatus.NO_CONTENT);
+        if (allByParams.isEmpty()) {
+            return new ResponseEntity<>(new ApiError("No such cars with this parameter in DB"), HttpStatus.NO_CONTENT);
         }
 
 
-        return new ResponseEntity<>(allByParams,HttpStatus.OK);
+        return new ResponseEntity<>(allByParams, HttpStatus.OK);
     }
-
 
 
 }

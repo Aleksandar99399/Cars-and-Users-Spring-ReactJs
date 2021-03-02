@@ -51,7 +51,7 @@ public class CarServiceImpl implements CarService {
     @Override
     public List<Car> getAllCars() {
 
-        return carRepository.findAll();
+        return this.carRepository.findAll();
     }
 
     @Override
@@ -61,7 +61,7 @@ public class CarServiceImpl implements CarService {
         if (car.isEmpty()){
             return false;
         }
-        carRepository.deleteById(id);
+        this.carRepository.deleteById(id);
         return true;
     }
 
@@ -93,6 +93,8 @@ public class CarServiceImpl implements CarService {
             car.setOwner(carDto.getOwner());
         }
 
+        this.carRepository.save(car);
+
         return car;
     }
 
@@ -105,7 +107,7 @@ public class CarServiceImpl implements CarService {
 
     @Override
     public Optional<Car> getById(Long id) {
-        return carRepository.findById(id);
+        return this.carRepository.findById(id);
     }
 
 
