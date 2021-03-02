@@ -29,7 +29,8 @@ public class CarController {
     public ResponseEntity<Object> createCar(@RequestBody CarDto car, HttpServletResponse response) {
 
         if (car.getOwner() == null || car.getBrand() == null || car.getModel() == null) {
-            return new ResponseEntity<Object>(new ApiError("Owner - all fields, Brand and Model are required in RequestBody"),
+            return new ResponseEntity<Object>(
+                    new ApiError("Owner - all fields, Brand and Model as objects are required in RequestBody"),
                     HttpStatus.BAD_REQUEST);
         }
 
@@ -53,7 +54,7 @@ public class CarController {
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<Object> deleteCar(@PathVariable Long id) {
         if (!carService.deleteCar(id)) {
-            return new ResponseEntity<>(new ApiError("Car is not exist"), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(new ApiError("Car is not exist"), HttpStatus.NOT_FOUND);
         }
 
         return new ResponseEntity<>(HttpStatus.OK);
@@ -64,7 +65,7 @@ public class CarController {
     public ResponseEntity<Object> updateCar(@PathVariable Long id, @RequestBody CarDto carDto) {
 
         if (carService.getById(id).isEmpty()) {
-            return new ResponseEntity<>(new ApiError("No such car with this ID"), HttpStatus.OK);
+            return new ResponseEntity<>(new ApiError("No such car with this ID"), HttpStatus.NOT_FOUND);
         }
 
         Car car = carService.updateCar(id, carDto);
