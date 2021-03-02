@@ -30,7 +30,7 @@ public class CarController {
 
         if (car.getOwner() == null || car.getBrand() == null || car.getModel() == null) {
             return new ResponseEntity<Object>(
-                    new ApiError("Owner - all fields, Brand and Model as objects are required in RequestBody"),
+                    new ApiError("Owner - all fields, Brand and Model  are required in RequestBody"),
                     HttpStatus.BAD_REQUEST);
         }
 

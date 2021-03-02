@@ -1,5 +1,7 @@
 package com.carsandusers.entities;
 
+import com.sun.istack.NotNull;
+
 import javax.persistence.*;
 
 @Entity
@@ -37,7 +39,7 @@ public class Car extends Brand{
         return this;
     }
 
-    @Column(name = "reg_number")
+    @Column(name = "reg_number",unique = true)
     public String getRegistrationNumber() {
         return registrationNumber;
     }
