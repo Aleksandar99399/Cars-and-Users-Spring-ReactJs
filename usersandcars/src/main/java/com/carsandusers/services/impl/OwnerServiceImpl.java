@@ -26,4 +26,9 @@ public class OwnerServiceImpl implements OwnerService {
         return test;
 
     }
+
+    @Override
+    public Owner save(Owner owner) {
+        return this.ownerRepository.save(owner);
+    }
 }
