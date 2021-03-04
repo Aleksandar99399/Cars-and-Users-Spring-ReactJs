@@ -31,4 +31,9 @@ public class OwnerServiceImpl implements OwnerService {
     public Owner save(Owner owner) {
         return this.ownerRepository.save(owner);
     }
+
+    @Override
+    public Owner getOwner(String email) {
+        return ownerRepository.findByEmail(email);
+    }
 }

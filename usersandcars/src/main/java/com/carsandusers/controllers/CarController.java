@@ -14,7 +14,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/car")
+@RequestMapping("/api/cars")
+@CrossOrigin
 public class CarController {
 
     private final CarService carService;
@@ -40,7 +41,7 @@ public class CarController {
         return new ResponseEntity<Object>(newCar, HttpStatus.CREATED);
     }
 
-    @GetMapping("/all")
+    @GetMapping("/")
     public ResponseEntity<Object> getAllCars() {
         List<Car> cars = carService.getAllCars();
 

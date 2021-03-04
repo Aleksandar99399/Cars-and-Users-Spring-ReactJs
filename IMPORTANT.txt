@@ -1,0 +1,7 @@
+Front-end - React
+Back-end - Java
+
+стартират се на различни портове
+
+Преди да стартирате React в конзолата 
+напишете npm install за да инсталира папката node_modules

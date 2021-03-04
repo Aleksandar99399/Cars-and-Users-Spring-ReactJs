@@ -90,26 +90,30 @@ public class CarServiceImpl implements CarService {
         }
 
         if (carDto.getOwner()!=null){
-            Owner owner = car.getOwner();
+            if (ownerService.getOwner(carDto.getOwner().getEmail())!=null){
+                car.setOwner(ownerService.getOwner(carDto.getOwner().getEmail()));
+            }else {
+                Owner owner = car.getOwner();
 
-            if (carDto.getOwner().getEmail()!=null){
-                owner.setEmail(carDto.getOwner().getEmail());
+                if (carDto.getOwner().getEmail() != null) {
+                    owner.setEmail(carDto.getOwner().getEmail());
+                }
+
+                if (carDto.getOwner().getFirstName() != null) {
+                    owner.setFirstName(carDto.getOwner().getFirstName());
+                }
+
+                if (carDto.getOwner().getLastName() != null) {
+                    owner.setLastName(carDto.getOwner().getLastName());
+                }
+
+                if (carDto.getOwner().getTelephoneNumber() != null) {
+                    owner.setTelephoneNumber(carDto.getOwner().getTelephoneNumber());
+                }
+
+                this.ownerService.save(owner);
+                car.setOwner(owner);
             }
-
-            if (carDto.getOwner().getFirstName()!=null){
-                owner.setFirstName(carDto.getOwner().getFirstName());
-            }
-
-            if (carDto.getOwner().getLastName()!=null){
-                owner.setLastName(carDto.getOwner().getLastName());
-            }
-
-            if (carDto.getOwner().getTelephoneNumber()!=null){
-                owner.setTelephoneNumber(carDto.getOwner().getTelephoneNumber());
-            }
-
-            this.ownerService.save(owner);
-            car.setOwner(owner);
         }
 
         this.carRepository.save(car);

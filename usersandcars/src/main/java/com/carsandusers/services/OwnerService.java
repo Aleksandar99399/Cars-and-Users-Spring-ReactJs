@@ -7,4 +7,6 @@ public interface OwnerService {
     Owner createOwner(Owner owner);
 
     Owner save(Owner owner);
+
+    Owner getOwner(String  email);
 }
