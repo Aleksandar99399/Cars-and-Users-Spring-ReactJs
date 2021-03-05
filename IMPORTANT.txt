@@ -1,7 +1,11 @@
-Front-end - React
-Back-end - Java
+Back-end - Java - InteliJ Idea
+Front-end - React - Visual Studio Code
 
-стартират се на различни портове
+Стартират се на различни портове
+Променете username и password в application.properties
+с вашите данни на базата данни.
 
-Преди да стартирате React, в конзолата 
-напишете npm install за да инсталира папката node_modules
+1: Преди да стартирате React, в конзолата 
+   напишете npm install за да инсталира папката node_modules
+
+2: npm start

@@ -13,8 +13,9 @@ class AllParams extends React.Component {
       .then((res) => {
         const carData = res.data;
         this.setState({ carData });
-
-        alert("Go back to see all cars");
+      })
+      .catch((res) => {
+        alert(res.response.data.message);
       });
   }
 
@@ -57,12 +58,6 @@ class RowCreator extends React.Component {
         <td>{car.owner.id}</td>
         <td>{car.brand}</td>
         <td>{car.model}</td>
-        <td>
-          <Link to={"/cars/update/" + car.id}>Update Car</Link>
-        </td>
-        <td>
-          <Link to={"/cars/delete/" + car.id}>Delete Car</Link>
-        </td>
       </tr>
     );
   }

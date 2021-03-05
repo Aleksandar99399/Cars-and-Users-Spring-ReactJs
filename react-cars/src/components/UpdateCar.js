@@ -31,7 +31,10 @@ class UpdateCar extends React.Component {
         data
       )
       .then((res) => {
-        alert("Cars is updated successfully \nGo Back to see all cars");
+        alert("Car is updated successfully\nGo Back to all cars");
+      })
+      .catch((res) => {
+        alert(res.response.data.message);
       });
   }
 

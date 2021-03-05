@@ -36,4 +36,17 @@ public class OwnerServiceImpl implements OwnerService {
     public Owner getOwner(String email) {
         return ownerRepository.findByEmail(email);
     }
+
+    @Override
+    public boolean requiredOwner(Owner owner) {
+
+        if (owner.getFirstName().equals("") || owner.getLastName().equals("")
+                || owner.getTelephoneNumber() .equals("") || owner.getEmail().equals("")){
+
+            return  false;
+        }
+
+        return true;
+
+    }
 }

@@ -3,6 +3,9 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 
 class CreateCar extends React.Component {
+  state = {
+    redirect: false,
+  };
   handleSubmit(event) {
     event.preventDefault();
 
@@ -22,9 +25,15 @@ class CreateCar extends React.Component {
       model: this.model,
     };
 
-    axios.post("http://localhost:5000/api/cars/create", data).then((res) => {
-      alert("Cars is added successfully \n Go Back to see all cars");
-    });
+    axios
+      .post("http://localhost:5000/api/cars/create", data)
+      .then((res) => {
+        alert("Cars is added successfully \nGo Back to see all cars");
+      })
+      .catch((res) => {
+        console.log(res);
+        alert(res.response.data.message);
+      });
   }
 
   render() {

@@ -1,12 +1,16 @@
 package com.carsandusers.error;
 
-public class ApiError {
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.ResponseStatus;
+
+
+public class ApiError  {
 
     private String message;
 
-
     public ApiError(String message) {
-        this.message = message;
+
+        this.message=message;
 
     }
 
@@ -18,6 +22,4 @@ public class ApiError {
         this.message = message;
         return this;
     }
-
-
 }

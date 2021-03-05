@@ -9,4 +9,6 @@ public interface OwnerService {
     Owner save(Owner owner);
 
     Owner getOwner(String  email);
+
+    boolean requiredOwner(Owner owner);
 }
