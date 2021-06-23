@@ -1,2 +1,4 @@
-package com.carsandusers.test2branch;public class asda {
+package com.carsandusers.test2branch;
+
+public class asda {
 }
