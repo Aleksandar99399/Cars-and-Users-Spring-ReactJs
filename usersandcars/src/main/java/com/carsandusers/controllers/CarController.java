@@ -11,7 +11,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/cars")
@@ -50,16 +52,16 @@ public class CarController {
         return new ResponseEntity<>(newCar, HttpStatus.CREATED);
     }
 
-    @GetMapping("/")
-    public ResponseEntity<Object> getAllCars() {
-        List<Car> cars = carService.getAllCars();
-
-        if (cars.isEmpty()) {
-            return new ResponseEntity<>(new ApiError("Not have cars for view"), HttpStatus.NOT_FOUND);
-        }
-
-        return new ResponseEntity<>(cars, HttpStatus.OK);
-    }
+//    @GetMapping("/")
+//    public ResponseEntity<Object> getAllCars() {
+//        List<Car> cars = carService.getAllCars();
+//
+//        if (cars.isEmpty()) {
+//            return new ResponseEntity<>(new ApiError("Not have cars for view"), HttpStatus.NOT_FOUND);
+//        }
+//
+//        return new ResponseEntity<>(cars, HttpStatus.OK);
+//    }
 
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<Object> deleteCar(@PathVariable Long id) {
@@ -85,9 +87,24 @@ public class CarController {
 
     }
 
-    @GetMapping("/all/params")
-    public ResponseEntity<Object> getAllParam(@RequestParam(name = "model") String param) {
-        List<Car> allByParams = carService.findAllByParams(param);
+    @GetMapping("/all")
+    public ResponseEntity<Object> getAllParam(@RequestParam(required = false) Map<String,String> str) {
+
+        if (str.size() == 0){
+            List<Car> cars = carService.getAllCars();
+
+            if (cars.isEmpty()) {
+                return new ResponseEntity<>(new ApiError("Not have cars for view"), HttpStatus.NOT_FOUND);
+            }
+
+            return new ResponseEntity<>(cars, HttpStatus.OK);
+        }
+
+        List<Car> allByParams = new ArrayList<>();
+        if (str.containsKey("brand")){
+            allByParams = carService.findAllByParams(str.get("brand"));
+        }
+
 
         if (allByParams.isEmpty()) {
             return new ResponseEntity<>(new ApiError("No such cars with this parameter in DB"), HttpStatus.NO_CONTENT);

@@ -18,7 +18,7 @@ class DeleteCar extends React.Component {
   }
 
   render() {
-    return <Link to={"/"}> Go Back</Link>;
+    return <Link to={"/cars/all"}> Go Back</Link>;
   }
 }
 

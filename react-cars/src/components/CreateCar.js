@@ -97,7 +97,7 @@ class CreateCar extends React.Component {
           />
           <button onClick={this.handleSubmit.bind(this)}>Confirm</button>
         </form>
-        <Link to={"/"}>Go Back</Link>
+        <Link to={"/cars/all"}>Go Back</Link>
       </div>
     );
   }
