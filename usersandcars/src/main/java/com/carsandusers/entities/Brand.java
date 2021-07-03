@@ -2,6 +2,7 @@ package com.carsandusers.entities;
 
 import javax.persistence.*;
 
+
 @MappedSuperclass
 public class Brand extends Model{
 
